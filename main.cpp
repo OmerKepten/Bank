@@ -19,7 +19,11 @@ int main(int argc, char* argv[]) {
     ThreadIdx++;
 
     for (int i=ThreadIdx;i<=NumOfATMs+ThreadIdx;i++){ //ATM initialization
-        pthread_create((pthread_t)i,NULL,&Bank::activateATM,argv[i+2]);
+        params p;
+        p.ATM_id_ = i;
+        p.argv = argv[i-2];
+        pthread_t pt= pthread_t(i);
+        pthread_create(&pt ,NULL, Bank::activateATM, &p);
     }
 
     //TODO: do some things, any other threads etc
@@ -33,6 +37,5 @@ int main(int argc, char* argv[]) {
             //TODO: add error handling
         }
     }
-    pthread_join()
 }
 

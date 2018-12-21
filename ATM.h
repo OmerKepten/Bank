@@ -12,7 +12,7 @@
 
 class ATM {
 public:
-    ATM();
+    ATM(int id);
     bool ATMLock();
     bool ATMUnlock();
     bool ActUponCommand(char cmd, int args[]); //TODO: this function gets command name and arguments, and calls the other functions. Remember to sleep(1) during cmd, and sleep(0.1) between cmds (0.1 taken care of in bank)
@@ -22,9 +22,7 @@ public:
 
 private:
     int id_;
-    pthread_mutex_t read_lock;
-    pthread_mutex_t write_lock;
-    int readers;
+    pthread_mutex_t lock_;
 };
 
 
